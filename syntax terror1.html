@@ -1,0 +1,211 @@
+<audio id="spongebob" src="spongebob (1).mp3"></audio>
+  <audio id="getout" src="GET OUT.mp3"></audio>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Guess What I'm Thinking</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', sans-serif;
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%, #a1c4fd 100%, #c2e9fb 100%);
+      text-align: center;
+      padding-top: 100px;
+      min-height: 100vh;
+      transition: background 0.5s;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 250px;
+    }
+    button {
+      padding: 10px 24px;
+      font-size: 18px;
+      margin-left: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    @keyframes bounce {
+      0%   { transform: scale(1); }
+      20%  { transform: scale(1.1); }
+      50%  { transform: scale(0.95); }
+      70%  { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .bounce {
+      animation: bounce 0.4s;
+    }
+    button[type="submit"] {
+      background: linear-gradient(90deg, #ff5757, #ffb347);
+      color: #fff;
+    }
+    button[type="button"] {
+      background: linear-gradient(90deg, #ff5757, #ffb347);
+      color: #fff;
+    }
+    .message {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #333;
+    }
+    .history {
+      margin-top: 10px;
+      font-size: 14px;
+      color: gray;
+    }
+    #closeBtn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 14px 32px;
+      font-size: 22px;
+      background: linear-gradient(90deg, #ffb347, #57aaff);
+      color: #fff;
+      border: none;
+      border-radius: 40px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #closeBtn:hover {
+      background: linear-gradient(90deg, #57aaff, #ffb347);
+      transform: scale(1.08);
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <h1>🧠 Guess What I'm Thinking</h1>
+
+  <p>You'll never guess it. But go ahead and try.</p>
+
+  <form id="guessForm" autocomplete="off" style="display:inline;" onsubmit="event.preventDefault(); checkGuess();">
+    <input type="text" id="guess" placeholder="Your best guess..." />
+    <button type="submit">Guess</button>
+    <button type="button" onclick="giveUp()" style="background-color:#888; margin-left:10px;">Give Up</button>
+  </form>
+
+
+  <audio id="nope" src="nope.mp3"></audio>
+  <audio id="ooo_no" src="ooo_no.mp3"></audio>
+  <audio id="thud" src="thud.mp3"></audio>
+  <audio id="thud2" src="thud.mp3.mp3"></audio>
+
+  <div class="message" id="message"></div>
+  <div class="history" id="history"></div>
+  <button id="hintBtn" style="margin-top:20px;padding:10px 24px;font-size:18px;background:linear-gradient(90deg,#57aaff,#ffb347);color:#fff;border:none;border-radius:30px;box-shadow:0 2px 8px rgba(0,0,0,0.10);cursor:pointer;transition:background 0.3s;">Hint</button>
+  <div id="hintArea" style="margin-top:10px;font-size:16px;color:#888;"></div>
+  <button id="closeBtn" style="position:absolute;top:20px;left:20px;padding:10px 24px;font-size:18px;background:linear-gradient(90deg,#ffb347,#57aaff);color:#fff;border:none;border-radius:30px;box-shadow:0 2px 8px rgba(0,0,0,0.15);cursor:pointer;transition:background 0.3s;display:flex;align-items:center;gap:8px;">🚪 Close</button>
+
+
+  <script>
+    // Add bounce effect to Guess button when clicked
+    const guessBtn = document.querySelector('button[type="submit"]');
+    guessBtn.addEventListener('click', function() {
+      guessBtn.classList.add('bounce');
+      setTimeout(() => guessBtn.classList.remove('bounce'), 400);
+    });
+    // Hint button logic
+    const hintBtn = document.getElementById('hintBtn');
+    const hintArea = document.getElementById('hintArea');
+    const sillyHints = [
+      "Try guessing the color of my socks!",
+      "It's not a potato, or is it?",
+      "The answer is somewhere between 1 and 1,000,000.",
+      "Ask your neighbor, they might know.",
+      "It's definitely not what you're thinking.",
+      "Hint: The answer rhymes with 'orange'.",
+      "Try typing with your eyes closed.",
+      "The answer is a secret only known to cats.",
+      "If you guess 'banana', you might be close. Or not.",
+      "The answer is hidden in plain sight."
+    ];
+    hintBtn.onclick = function() {
+      hintArea.innerText = sillyHints[Math.floor(Math.random() * sillyHints.length)];
+    };
+    // ...existing code...
+    let guessCount = 0;
+    let fakeAnswer = generateFakeAnswer();
+    let attempts = [];
+
+
+
+
+    function giveUp() {
+      const messageDiv = document.getElementById("message");
+      const historyDiv = document.getElementById("history");
+
+      messageDiv.innerText = `You gave up? Weak. bored: "${fakeAnswer}"`;
+      historyDiv.innerText = "Tip: Try not guessing next time. 😏";
+      // Play ooo_no sound
+      document.getElementById("ooo_no").play();
+      // Play GET OUT.mp3 sound
+      document.getElementById("getout").play();
+    }
+
+    function generateFakeAnswer() {
+      const nonsense = [
+        "Banana in a hat", "🔊", "A left-handed wrench 🛠️",
+        "42, you are not human", "You are a fool 🥔📶", "😞",
+        "You, but from another universe", "you are fool"
+      ];
+      return nonsense[Math.floor(Math.random() * nonsense.length)];
+    }
+
+    function checkGuess() {
+      const input = document.getElementById("guess").value.trim();
+      const messageDiv = document.getElementById("message");
+      const historyDiv = document.getElementById("history");
+
+      if (input === "") {
+        messageDiv.innerText = "Say something, brave guesser!";
+        return;
+      }
+
+      // Play nope sound
+      document.getElementById("nope").play();
+      // Play thud.mp3.mp3 song
+      document.getElementById("thud2").play();
+      // Play spongebob(1).mp3 sound
+      document.getElementById("spongebob").play();
+
+      guessCount++;
+      attempts.push(input);
+
+
+      const fakeResponses = [
+        "You're so close! (You're not.)",
+        "That's not it, but keep guessing!",
+        "Have you considered mind reading?",
+        "Wow. Still wrong."
+      ];
+
+      messageDiv.innerText = fakeResponses[Math.floor(Math.random() * fakeResponses.length)];
+      historyDiv.innerText = `Guesses so far: ${attempts.join(", ")}`;
+
+      // After 10 guesses, reveal fake answer and start new round (do NOT reset streak)
+      if (guessCount >= 10) {
+        messageDiv.innerText = `You gave up? I was thinking of: "${fakeAnswer}"`;
+        historyDiv.innerText = "Next time, try *not* guessing.";
+        // Start new round, but keep streak
+        guessCount = 0;
+        attempts = [];
+        fakeAnswer = generateFakeAnswer();
+      }
+
+      document.getElementById("guess").value = "";
+    }
+    document.getElementById('closeBtn').onclick = function() {
+  document.body.innerHTML = '<h2 style="margin-top:150px;font-size:2em;color:#ff5757;">Game closed. Refresh to play again.</h2>';
+};
+  </script>
+
+</body>
+</html>
+
