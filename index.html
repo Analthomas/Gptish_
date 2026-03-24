@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syntax Terror - Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <button class="new-chat-btn">
+                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                New chat
+            </button>
+            <div class="history-list">
+                <p class="history-title">Today</p>
+                <div class="history-item">What is the meaning of...</div>
+                <div class="history-item">How to become rich</div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile" onclick="alert('You cannot escape')">
+                    <img src="https://ui-avatars.com/api/?name=User&background=random" alt="User" class="avatar">
+                    <span>Innocent User</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-area">
+            <header class="chat-header">
+                <h2>Fake AI 1.0</h2>
+            </header>
+            
+            <div class="messages-container" id="chatContainer">
+                <!-- Welcome Message -->
+                <div class="message ai-message">
+                    <div class="message-content">
+                        <div class="avatar ai-avatar">
+                            <svg stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.5em" width="1.5em" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"></path></svg>
+                        </div>
+                        <div class="text">
+                            Hello! I am Syntax Terror. Ask me anything, and I will be sure to give you the most confidently wrong answer possible.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <textarea id="userInput" placeholder="Ask Fake AI anything..." rows="1"></textarea>
+                    <button id="sendBtn" class="send-btn" aria-label="Send message">
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.2em" width="1.2em" xmlns="http://www.w3.org/2000/svg"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                </div>
+                <p class="disclaimer">Fake AI can make mistakes. Consider checking important information. Or better yet, don't ask me.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Audio Elements for chaos -->
+    <audio id="audio-spongebob" src="spongebob (1).mp3"></audio>
+    <audio id="audio-getout" src="GET OUT.mp3"></audio>
+    <audio id="audio-thud" src="thud-sound-effect-319090 (1).mp3"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
